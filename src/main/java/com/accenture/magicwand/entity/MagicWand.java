@@ -1,11 +1,13 @@
 package com.accenture.magicwand.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "magic_wand")
 @Getter
 @Setter
