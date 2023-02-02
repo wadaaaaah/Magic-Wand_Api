@@ -14,15 +14,12 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-//@DataJpaTest
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class MagicWandTest {
 
     @Autowired
     private MagicWandRepository repo;
-
-    //private static final Logger log = (Logger) LoggerFactory.getLogger(MagicWandTest.class);
     @Autowired
     MagicWand entity;
 
@@ -42,34 +39,24 @@ public class MagicWandTest {
     }
 
     @Test
-    @Rollback(value = false)
     public void deleteMagicTest(){
-        entity = repo.findById(5L).get();
-        repo.delete(entity);
-
-        MagicWand magicWand = null;
-        Optional<MagicWand> optionalMagic = repo.findById(5L);
-
-        if(optionalMagic.isPresent()){
-            magicWand = optionalMagic.get();
-        }
-
-        Assertions.assertThat(magicWand).isNull();
+        repo.deleteById(5L);
+        Assertions.assertThat(repo.existsById(5L)).isFalse();
     }
 
 
     @Test
     public void addMagicTest(){
         MagicWand magic = new MagicWand();
-        magic.setId(6L);
-        magic.setName("Wada");
-        magic.setNarrative("This is junit test");
+        magic.setId(7L);
+        magic.setName("nur");
+        magic.setNarrative("This is junit test no 2");
         magic.setAge_limit(50);
         magic.setStock(400L);
 
         repo.save(magic);
         System.out.println();
-        assertNotNull(repo.findById(6L).get());
+        assertNotNull(repo.findById(7L).get());
 
     }
 
